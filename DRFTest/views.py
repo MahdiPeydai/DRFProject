@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .serializers import *
-from .permissions import IsAuthorOrReadOnly
+from .permissions import IsAdmin, IsAuthorOrReadOnly
 
 # Creating API views for publisher model
 # the most simple one
@@ -34,6 +34,7 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
 class AuthorList(generics.ListCreateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [IsAdmin]
 
 
 class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
