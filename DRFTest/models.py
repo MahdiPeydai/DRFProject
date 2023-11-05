@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 class Author(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50, null=False)
-    last_name = models.CharField(max_length=50, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -14,7 +12,7 @@ class Author(models.Model):
         db_table = 'author'
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 class Publisher(models.Model):
