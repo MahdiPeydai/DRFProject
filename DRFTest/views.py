@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import *
+from .serializers import *
 
-# Create your views here.
+
+class PublisherList(generics.ListCreateAPIView):
+    queryset = Publisher.objects.all()
+    serializer_class = PublisherSerializer
+
+
+class PublisherDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Publisher.objects.all()
+    serializer_class = PublisherSerializer
+
