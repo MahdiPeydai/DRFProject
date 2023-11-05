@@ -9,3 +9,8 @@ class PublisherSerializer(ModelSerializer):
         read_only_fields = ['created_at']
 
 
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'created_at']
+        read_only_fields = ['created_at']
