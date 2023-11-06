@@ -8,11 +8,13 @@ from .permissions import IsAdmin, IsAuthorOrReadOnly
 class PublisherList(generics.ListCreateAPIView):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
+    permission_classes = [IsAdmin]
 
 
 class PublisherDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
+    permission_classes = [IsAdmin]
 # ----------------
 
 
@@ -21,11 +23,13 @@ class PublisherDetail(generics.RetrieveUpdateDestroyAPIView):
 class CategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAdmin]
 
 
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAdmin]
 # ----------------
 
 
