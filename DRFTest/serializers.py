@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, reverse
 from rest_framework.serializers import ModelSerializer
 from .models import *
 
@@ -25,23 +25,16 @@ class AuthorSerializer(ModelSerializer):
 
 
 class BookSerializer(ModelSerializer):
-    author = serializers.StringRelatedField()
-    author_url = serializers.HyperlinkedRelatedField(
-        view_name='AuthorDetail',
-        queryset=Author.objects.all()
-    )
-    publisher = serializers.StringRelatedField()
-    publisher_url = serializers.HyperlinkedRelatedField(
-        view_name='PublisherDetail',
-        queryset=Publisher.objects.all()
-    )
-    categories = serializers.StringRelatedField(many=True)
-    categories_url = serializers.HyperlinkedRelatedField(
-        view_name='CategoryDetail',
-        queryset=Category.objects.all(),
-        many=True
-    )
-    readers = serializers.StringRelatedField()
+
+    def get_author_url(self, obj):
+        url = serializers.HyperlinkedRelatedField(view_name='AuthorDetail', queryset=Author.objects.all())
+        return url.get_url(obj=obj.author, view_name='AuthorDetail', request=self.context['request'], format=None)
+    author_url = serializers.SerializerMethodField(method_name='get_author_url')
+
+    def get_publisher_url(self, obj):
+        url = serializers.HyperlinkedRelatedField(view_name='PublisherDetail', queryset=Publisher.objects.all())
+        return f"{url.get_url(obj=obj.publisher, view_name='PublisherDetail', request=self.context['request'], format=None)}"
+    publisher_url = serializers.SerializerMethodField(method_name='get_publisher_url')
 
     class Meta:
         model = Book
@@ -53,7 +46,6 @@ class BookSerializer(ModelSerializer):
                   'publisher',
                   'publisher_url',
                   'categories',
-                  'categories_url',
                   'readers',
                   'created_at',
                   'updated_at']
