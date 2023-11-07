@@ -9,4 +9,6 @@ urlpatterns = [
     path('category/<int:pk>', views.CategoryDetail.as_view(), name='CategoryDetail'),
     path('author/', views.AuthorList.as_view(), name='AuthorList'),
     path('author/<int:pk>', views.AuthorDetail.as_view(), name='AuthorDetail'),
+    path('book/', views.BookList.as_view(), name='BookList'),
+    path('book/<int:pk>', views.BookDetail.as_view(), name='BookDetail'),
 ]
