@@ -47,7 +47,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, related_name='books')
-    readers = models.ManyToManyField('auth.User', related_name='snippets')
+    readers = models.ManyToManyField('auth.User', related_name='books')
     page = models.IntegerField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
