@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 
@@ -7,6 +8,11 @@ class Author(models.Model):
     user = models.OneToOneField('auth.User', related_name='author', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f"{self.user.first_name} {self.user.last_name}")
+        super().save(*args, **kwargs)
 
     class Meta:
         db_table = 'author'
