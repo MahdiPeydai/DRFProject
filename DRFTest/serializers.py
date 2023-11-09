@@ -18,6 +18,8 @@ class CategorySerializer(ModelSerializer):
 
 
 class AuthorSerializer(ModelSerializer):
+    slug = serializers.SlugField(read_only=True)
+
     class Meta:
         model = Author
         fields = '__all__'
