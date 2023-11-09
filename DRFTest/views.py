@@ -44,6 +44,7 @@ class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    lookup_field = 'slug'
 
 
 # creating API views for book model
