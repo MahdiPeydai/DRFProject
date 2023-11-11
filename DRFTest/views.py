@@ -15,6 +15,7 @@ class PublisherDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
     permission_classes = [IsAdmin]
+    lookup_field = 'slug'
 # ----------------
 
 
@@ -30,6 +31,7 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAdmin]
+    lookup_field = 'slug'
 # ----------------
 
 
@@ -44,6 +46,7 @@ class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    lookup_field = 'slug'
 
 
 # creating API views for book model
@@ -57,3 +60,4 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    lookup_field = 'slug'
