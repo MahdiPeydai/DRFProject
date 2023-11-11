@@ -9,6 +9,16 @@ class AuthorAdmin(admin.ModelAdmin):
     readonly_fields = ['slug']
 
 
-admin.site.register(Book)
-admin.site.register(Publisher)
-admin.site.register(Category)
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    readonly_fields = ['slug']
+
+
+@admin.register(Publisher)
+class PublisherAdmin(admin.ModelAdmin):
+    readonly_fields = ['slug']
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    readonly_fields = ['slug']

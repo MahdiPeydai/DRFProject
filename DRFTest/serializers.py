@@ -4,16 +4,18 @@ from .models import *
 
 
 class PublisherSerializer(ModelSerializer):
+    slug = serializers.SlugField(read_only=True)
     class Meta:
         model = Publisher
-        fields = ['id', 'name', 'created_at']
+        fields = '__all__'
         read_only_fields = ['created_at']
 
 
 class CategorySerializer(ModelSerializer):
+    slug = serializers.SlugField(read_only=True)
     class Meta:
         model = Category
-        fields = ['id', 'name', 'created_at']
+        fields = '__all__'
         read_only_fields = ['created_at']
 
 
@@ -27,6 +29,7 @@ class AuthorSerializer(ModelSerializer):
 
 
 class BookSerializer(ModelSerializer):
+    slug = serializers.SlugField(read_only=True)
 
     def get_author_url(self, obj):
         url = serializers.HyperlinkedRelatedField(view_name='AuthorDetail', queryset=Author.objects.all())
@@ -49,6 +52,7 @@ class BookSerializer(ModelSerializer):
                   'publisher_url',
                   'categories',
                   'readers',
+                  'slug',
                   'created_at',
                   'updated_at']
         read_only_fields = ['created_at',
